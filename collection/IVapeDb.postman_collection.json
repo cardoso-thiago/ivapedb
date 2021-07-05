@@ -1,0 +1,100 @@
+{
+  "info": {
+    "_postman_id": "fa6646a0-2f22-4409-a956-1e4f96592ef5",
+    "name": "IVapeDb",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "SaveMod",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Vaporesso Tarot Baby\",\n  \"dimensions\": \"42x25x114mm\",\n  \"weight\": \"102g\",\n  \"brandId\": \"60e38637c0efe13f83ec7c43\",\n  \"capacity\": \"2mL/4.5mL\",\n  \"charging\": \"Micro USB Port\",\n  \"batteryTypeId\": \"60e38637c0efe13f83ec7c43\",\n  \"outputWattage\": \"5-85W\",\n  \"display\": \"0.96 TFT Color Display\",\n  \"coil\": \"0.18ohm GT Meshed Coil - 0.5ohm GT CCell Coil\",\n  \"website\": \"https://www.vaporesso.com/\",\n  \"images\": [\n      \"https://ik.imagekit.io/capfeawef1g/tarot_baby_verde_fZzyZVlQA.jpeg\",\n      \"https://ik.imagekit.io/capfeawef1g/tarot_baby_azul_0VlAIPYJj.jpg\",\n      \"https://ik.imagekit.io/capfeawef1g/tarot_baby_vermelho__xs5GvMG8.jpg\"\n  ]\n}\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/v1/mod",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "v1",
+            "mod"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GetAllMods",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/v1/mod",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "v1",
+            "mod"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GetModById",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/v1/mod/60e38b69ce91340910723acf",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "v1",
+            "mod",
+            "60e38b69ce91340910723acf"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "DeleteModById",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/v1/mod/60e38637c0efe13f83ec7c43",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "v1",
+            "mod",
+            "60e38637c0efe13f83ec7c43"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
