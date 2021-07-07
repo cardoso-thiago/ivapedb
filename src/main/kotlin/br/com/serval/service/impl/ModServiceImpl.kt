@@ -1,24 +1,34 @@
 package br.com.serval.service.impl
 
-import br.com.serval.document.Mod
+import br.com.serval.entity.Mod
 import br.com.serval.repository.ModRepository
+import br.com.serval.service.BatteryService
+import br.com.serval.service.BrandService
+import br.com.serval.service.ChargingTypeService
 import br.com.serval.service.ModService
-import org.springframework.cache.annotation.CacheEvict
-import org.springframework.cache.annotation.Cacheable
 import org.springframework.stereotype.Service
 
 @Service
-class ModServiceImpl(private val modRepository: ModRepository) : ModService {
+class ModServiceImpl(
+    private val modRepository: ModRepository,
+    private val brandService: BrandService,
+    private val batteryService: BatteryService,
+    private val chargingTypeService: ChargingTypeService
+) : ModService {
 
-//    @Cacheable(cacheNames = ["Mod"], key = "#root.method.name")
-    override fun findAllMods() = modRepository.findAll()
+    override fun findAllMods() = modRepository.findAll().toList()
 
-//    @Cacheable(cacheNames = ["Mod"], key = "#id")
-    override fun findModById(id: String) = modRepository.findById(id)
+    override fun findModById(id: Long) = modRepository.findById(id).get()
 
-//    @CacheEvict(cacheNames = ["Mod"], allEntries = true)
-    override fun deleteModById(id: String) = modRepository.deleteById(id)
+    override fun deleteModById(id: Long) = modRepository.deleteById(id)
 
-//    @CacheEvict(cacheNames = ["Mod"], allEntries = true)
-    override fun saveMod(mod: Mod) = modRepository.save(mod)
+    override fun saveMod(brandId: Long, batteryId: Long, chargingTypeId: Long, mod: Mod): Mod {
+        val brand = brandService.findBrandById(brandId)
+        val battery = batteryService.findBatteryById(batteryId)
+        val chargingType = chargingTypeService.findChargingTypeById(chargingTypeId)
+        mod.brand = brand
+        mod.battery = battery
+        mod.chargingType = chargingType
+        return modRepository.save(mod)
+    }
 }

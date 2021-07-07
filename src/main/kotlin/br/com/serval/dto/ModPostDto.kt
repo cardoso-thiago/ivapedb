@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonInclude
 import java.io.Serializable
 
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-data class ModDto(
+data class ModPostDto(
     var id: Long? = null,
     val name: String,
     val dimensions: String,
@@ -13,8 +13,7 @@ data class ModDto(
     val outputWattage: String,
     val display: String,
     val coil: String,
-    val brand: BrandDto? = null,
-    val battery: BatteryDto? = null,
-    val chargingType: ChargingTypeDto? = null,
-    val modImages: List<ModImageDto>? = null
+    val brandId: Long,
+    val batteryId: Long,
+    val chargingTypeId: Long
 ) : Serializable

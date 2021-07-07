@@ -1,6 +1,0 @@
-docker exec -it <mongo_container_id> sh 
-mongo
-use admin
-use ivapedb
-show collections
-db.mod.find()

@@ -1,13 +1,11 @@
 package br.com.serval.service
 
-import br.com.serval.document.Mod
-import reactor.core.publisher.Flux
-import reactor.core.publisher.Mono
+import br.com.serval.entity.Mod
 
 interface ModService {
 
-    fun findAllMods(): Flux<Mod>
-    fun findModById(id: String): Mono<Mod>
-    fun deleteModById(id: String): Mono<Void>
-    fun saveMod(mod: Mod): Mono<Mod>
+    fun findAllMods(): List<Mod>
+    fun findModById(id: Long): Mod
+    fun deleteModById(id: Long)
+    fun saveMod(brandId: Long, batteryId: Long, chargingTypeId: Long, mod: Mod): Mod
 }

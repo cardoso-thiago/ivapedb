@@ -1,6 +1,6 @@
 package br.com.serval.repository
 
-import br.com.serval.entity.Mod
+import br.com.serval.entity.Brand
 import org.springframework.data.repository.CrudRepository
 
-interface ModRepository : CrudRepository<Mod, Long>
+interface BrandRepository : CrudRepository<Brand, Long>
