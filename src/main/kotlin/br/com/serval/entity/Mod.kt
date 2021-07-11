@@ -9,7 +9,7 @@ data class Mod(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     var id: Long? = null,
-    @Column(name = "name")
+    @Column(name = "name", unique = true)
     val name: String,
     @Column(name = "dimensions")
     val dimensions: String,
@@ -21,8 +21,6 @@ data class Mod(
     val outputWattage: String,
     @Column(name = "display")
     val display: String,
-    @Column(name = "coil")
-    val coil: String,
     @ManyToOne
     @JoinColumn(name = "brand_id")
     var brand: Brand? = null,

@@ -9,7 +9,7 @@ data class Brand(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     var id: Long? = null,
-    @Column(name = "name")
+    @Column(name = "name", unique = true)
     var name: String,
     @Column(name = "website")
     var website: String,

@@ -1,0 +1,61 @@
+= Execução IVapeDB
+
+== Docker Compose
+
+Na pasta docker, existe um docker-compose.yml, mas antes de executar, podem ser necessárias algumas configurações:
+
+=== Configurações Docker Compose
+
+Algumas configurações que podem ser necessárias:
+
+* Na pasta docker, criar uma pasta com o nome `grafana_data` e dar permissão de escrita.
+** Isso é necessário para salvar o estado da imagem do grafana. Com isso, a configuração do grafana se manterá entre execuções.
+* Na pasta docker, criar uma pasta com o nome `postgres-data` e dar permissão de escrita.
+** Isso é necessáio para salvar o estado do postgre. Com isso, as informações a criação e as informações adicionadas na tabelas durantes os testes se manterão entre as execuções.
+* No arquivo prometheus.yml, é necessário apontar para o endereço da aplicação IVapeDB. No Linux, o IP fixo `172.17.0.1` pode ser utilizado. Para as demais plataformas, o `host.docker.internal` pode ser utilizado.
+
+=== Subindo a Stack
+
+Depois das configurações realizadas, na raiz da pasta docker, basta executar agora o comando `docker-compose up` e aguardar a inicialização para subir a aplicação.
+
+== Acessando e Configurando os Serviços
+
+=== Adminer
+
+* Endereço: http://localhost:8080/
+* Dados de acesso:
+** Sistema: PostgreSQL
+** Senha: test
+** Demais dados: postgres
+
+=== Zipkin
+
+* Endereço: http://localhost:9411/zipkin/
+
+=== Prometheus
+
+* Endereço: http://localhost:9090/
+
+=== Grafana
+
+Endereço: http://localhost:3000
+Senha e usuário iniciais: admin
+
+Na primeira execução do Grafana, os dados serão criados no volume compartilhado. Se a senha for alterada nesse ponto, ela será mantida. Para adicionar um novo dashboard, que também será mantido nas próximas execuções, execute os seguintes passos:
+
+* Na barra lateral da esquerda, clique na engrenagem e em seguida em `Data sources`. Em seguida, clique no botão `Add data source`.
+* Selecione a opção `Prometheus`. 
+* Na URL, adicione o endereço do Prometheus. No Linux, pode ser adicionado com o IP fixo: `http://172.17.0.1:9090`. Para as demais plataformas, o `host.docker.internal:9090` pode ser utilizado.
+
+Um novo dashboard pode ser criado agora, tendo como base o Prometheus. Ele pode ser criado do zero, ou importado dos templates disponibilizados pelo Grafana. Para importar um dashboard existente:
+
+* Na barra lateral da esquerda, clique no ícone de + e em seguida em `Import`.
+* Agora basta informar um id no campo, clicar no botão `Load` e selecionar o source do Prometheus. Como exemplo, pode ser utilizado o id 12271 que possui algumas informações interessantes.
+* Para verificar outros modelos, visite https://grafana.com/grafana/dashboards?dataSource=prometheus[a página do Grafana Dashboards]
+
+=== Redis
+
+Para acessar o Redis, em outro terminal, com a stack de pé, basta executar o comando `docker exec -it redis sh`. Em seguida, você pode dar o comando `redis-cli` para interagir com o cache do Redis. Alguns comandos:
+* `keys '*'`: Lista todas as entradas de cache. Para verificar novas entradas, basta executar o comando após realizar algumas consultas na aplicação.
+* `flushall`: Remove todas as entradas de cache.
+* Para a lista completa de comandos disponíveis, verifique a https://redis.io/commands[documentação de referência].

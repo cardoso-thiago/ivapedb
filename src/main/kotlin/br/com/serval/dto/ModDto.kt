@@ -12,7 +12,6 @@ data class ModDto(
     val capacity: String,
     val outputWattage: String,
     val display: String,
-    val coil: String,
     val brand: BrandDto? = null,
     val battery: BatteryDto? = null,
     val chargingType: ChargingTypeDto? = null,

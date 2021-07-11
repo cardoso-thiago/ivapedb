@@ -12,7 +12,6 @@ data class ModPostDto(
     val capacity: String,
     val outputWattage: String,
     val display: String,
-    val coil: String,
     val brandId: Long,
     val batteryId: Long,
     val chargingTypeId: Long

@@ -9,7 +9,7 @@ data class ChargingType(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     var id: Long? = null,
-    @Column(name = "description")
+    @Column(name = "description", unique = true)
     var description: String,
     @OneToMany(mappedBy = "chargingType", cascade = [CascadeType.ALL], orphanRemoval = true)
     val mods: List<Mod>? = null

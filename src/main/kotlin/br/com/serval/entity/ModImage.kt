@@ -9,7 +9,7 @@ data class ModImage(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     var id: Long? = null,
-    @Column(name = "url")
+    @Column(name = "url", unique = true)
     val url: String,
     @Column(name = "color")
     val color: String,
