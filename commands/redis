@@ -1,4 +1,0 @@
- 
-docker exec -it <redis_container_id> sh
-redis-cli 
-keys '*'
